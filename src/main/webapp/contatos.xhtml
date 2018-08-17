@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Lista de contatos</title>
+</h:head>
+<h:body>
+<h:form >
+	<h1> Lista de contatos</h1>
+	<p:dataTable value="#{contatoBean.contatos}" var="contato">
+		<p:column headerText="Id" style="text-align: center; width: 40px">
+			<p:outputLabel value="#{contato.id}" />	
+		</p:column>
+		<p:column  headerText="Nome">
+			<p:outputLabel value="#{contato.nome}" />
+		</p:column>
+		<p:column  headerText="Email">
+			<p:outputLabel value="#{contato.email}" />
+		</p:column>
+		<p:column  headerText="Contato">
+	 		<p:outputLabel value="#{contato.numeroContato}" />
+		</p:column>
+		
+		<p:column headerText="" style="text-align: center; width: 100px">
+		   		<p:commandButton  icon="ui-icon-pencil" title="Atualizar" action="#{contatoBean.abrirDialogo}" 
+		   		process="@this" update="@none"/>
+				<p:growl id="message" showDetail="true" />
+				      
+				<p:commandButton  action="#{contatoBean.deletar}" update="message" icon="ui-icon-close">
+				    <p:confirm header="Confirmation" message="Você tem certeza disso?" icon="ui-icon-alert" />
+				    <f:setPropertyActionListener target="#{contatoBean.contato}" value="#{contato}" />
+				</p:commandButton>
+		
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				    <p:commandButton 
+				    value="Sim" styleClass="ui-confirmdialog-yes" update="@form" process="@this" action="#{contatoBean.remover(contato)}"  icon="ui-icon-check" />
+				    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>	
+		</p:column>		
+
+
+	</p:dataTable>
+</h:form>	
+</h:body>
+</html>

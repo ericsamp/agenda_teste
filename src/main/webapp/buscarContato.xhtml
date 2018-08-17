@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</h:head>
+<h:body>
+
+	<h:form>
+    	<div style="margin-top: 5px; margin-bottom: 20px">
+    		<p:inputText id="nome" size="40" value="#{contatoBean.nome}" placeholder="Nome do contato" />
+    		
+    		<p:spacer width="10px"/>
+    		
+    		<p:commandButton value="Pesquisar" action="#{contatoBean.pesquisar}" update="@form" />
+    	</div>
+    	
+    	<p:dataTable value="#{contatoBean.contatos}" var="contato"
+    		emptyMessage="Nenhum contato encontrado." rows="10"
+    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+    		
+    		
+    		 <p:column headerText="Id" style="text-align: center; width: 40px">
+    			<h:outputText value="#{contato.id}" />
+    		</p:column>
+    		
+    
+    		<p:column headerText="Nome">
+    			<h:outputText value="#{contato.nome}" />
+    		</p:column>
+    		
+    		 <p:column headerText="Email">
+    			<h:outputText value="#{contato.email}" />
+    		</p:column>
+    		    		 <p:column headerText="Telefone">
+    			<h:outputText value="#{contato.numeroContato}" />
+    		</p:column>
+    		
+    		<p:column style="width: 100px; text-align: center">
+    			<p:commandButton icon="ui-icon-check" title="Selecionar"
+    				action="#{contatoBean.selecionar(contato)}"
+    				process="@this" />
+    				
+    				 <p:commandButton  icon="ui-icon-close" title="Deletar" />
+    		</p:column>
+    		
+    	</p:dataTable>
+	</h:form>
+</h:body>
+</html>
